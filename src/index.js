@@ -11,8 +11,9 @@ import store, {
 
 function getThreadIds() {
   let threadIds;
-  if (store.mailboxes.INBOX) {
-    threadIds = store.mailboxes.INBOX.threadIds;
+  const { INBOX } = store.mailboxes;
+  if (INBOX) {
+    threadIds = INBOX.threadIds;
   } else {
     threadIds = [];
   }
@@ -24,20 +25,18 @@ function renderSidebar() {
     <h2 class="email-header">Inbox</h2>
     <ul class="email-list">${getThreadIds()
     .map((threadId) => {
-      const message =
-          store.threads[threadId].messages[
-            store.threads[threadId].messages.length - 1
-          ];
+      const { messages } = store.threads[threadId];
+      const messageMetadata = messages[messages.length - 1];
+      const message = store.messages[messageMetadata.id];
       return `<li>
             <button class="email-item" type="button">
               <div class="sender-details">
-                <p>${getMessageSender(store.messages[message.id]) || ''}</p>
-                <span>${getMessageTimestamp(store.messages[message.id]) ||
-                  ''}</span>
+                <p>${getMessageSender(message) || ''}</p>
+                <span>${getMessageTimestamp(message) || ''}</span>
               </div>
               <p class="email-subject">
-                ${getMessageSubject(store.messages[message.id]) || ''}</p>
-              <p>${getMessageSnippet(message)}</p>
+                ${getMessageSubject(message) || ''}</p>
+              <p>${getMessageSnippet(messageMetadata)}</p>
             </button>
           </li>`;
     })

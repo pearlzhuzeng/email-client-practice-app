@@ -36,8 +36,8 @@ export function getMessageTimestamp(message: Message): ?string {
   return emailTimestamp && emailTimestamp.value;
 }
 
-export function getMessageSnippet(messagedata: MessageMetadata): string {
-  const emailSnippet = messagedata.snippet;
+export function getMessageSnippet(messageMetadata: MessageMetadata): string {
+  const emailSnippet = messageMetadata.snippet;
   return emailSnippet;
 }
 
