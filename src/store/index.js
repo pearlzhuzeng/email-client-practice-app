@@ -41,4 +41,14 @@ export function getMessageSnippet(messageMetadata: MessageMetadata): string {
   return emailSnippet;
 }
 
+export function formatSender(messageSender: string): string {
+  const formattedSender = messageSender.split('\\')[0];
+  return formattedSender;
+}
+
+export function formatTime(messageTimestamp: string): string {
+  const formattedTime = messageTimestamp.split('+')[0];
+  return formattedTime;
+}
+
 export default store;

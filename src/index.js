@@ -7,6 +7,8 @@ import store, {
   getMessageSender,
   getMessageTimestamp,
   getMessageSnippet,
+  formatSender,
+  formatTime,
 } from './store';
 
 function getThreadIds() {
@@ -31,8 +33,8 @@ function renderSidebar() {
       return `<li>
             <button class="email-item" type="button">
               <div class="sender-details">
-                <p>${getMessageSender(message).split('\\')[0] || ''}</p>
-                <span>${getMessageTimestamp(message).split('+')[0] || ''}</span>
+                <p>${formatSender(getMessageSender(message)) || ''}</p>
+                <span>${formatTime(getMessageTimestamp(message)) || ''}</span>
               </div>
               <p class="email-subject">
                 ${getMessageSubject(message) || ''}</p>
