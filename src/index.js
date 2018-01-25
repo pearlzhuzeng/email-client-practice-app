@@ -33,11 +33,13 @@ function renderSidebar() {
       return `<li>
             <button class="email-item" type="button">
               <div class="sender-details">
-                <p>${formatSender(getMessageSender(message)) || ''}</p>
-                <span>${formatTime(getMessageTimestamp(message)) || ''}</span>
+                <p>${formatSender(getMessageSender(message)) ||
+                  'Unknown Sender'}</p>
+                <span>${formatTime(getMessageTimestamp(message)) ||
+                  'Unknown Date'}</span>
               </div>
               <p class="email-subject">
-                ${getMessageSubject(message) || ''}</p>
+                ${getMessageSubject(message) || 'No Subject'}</p>
               <p>${getMessageSnippet(messageMetadata)}</p>
             </button>
           </li>`;
