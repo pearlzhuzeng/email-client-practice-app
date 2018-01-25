@@ -31,8 +31,8 @@ function renderSidebar() {
       return `<li>
             <button class="email-item" type="button">
               <div class="sender-details">
-                <p>${getMessageSender(message) || ''}</p>
-                <span>${getMessageTimestamp(message) || ''}</span>
+                <p>${getMessageSender(message).split('\\')[0] || ''}</p>
+                <span>${getMessageTimestamp(message).split('+')[0] || ''}</span>
               </div>
               <p class="email-subject">
                 ${getMessageSubject(message) || ''}</p>
