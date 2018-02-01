@@ -12,14 +12,9 @@ import store, {
 } from './store';
 
 function getThreadIds() {
-  let threadIds;
   const { INBOX } = store.mailboxes;
-  if (INBOX) {
-    threadIds = INBOX.threadIds;
-  } else {
-    threadIds = [];
-  }
-  return threadIds;
+  if (INBOX == null) return [];
+  return INBOX.threadIds;
 }
 
 function renderSidebar() {
