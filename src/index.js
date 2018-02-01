@@ -28,8 +28,7 @@ function renderSidebar() {
       return `<li>
             <button class="email-item" type="button">
               <div class="sender-details">
-                <p>${formatSender(getMessageSender(message)) ||
-                  new Error("Watch out! It's weird that there is no sender.")}</p>
+                <p>${formatSender(getMessageSender(message) || '')}</p>
                 <span>${formatTime(getMessageTimestamp(message)) ||
                   'Unknown Date'}</span>
               </div>

@@ -27,6 +27,9 @@ export function getMessageSubject(message: Message): ?string {
 export function getMessageSender(message: Message): ?string {
   const { headers } = message.payload;
   const emailSender = headers.find(header => header.name === 'From');
+  if (emailSender == null) {
+    throw new Error("Watch out! It's weird that there is no sender.");
+  }
   return emailSender && emailSender.value;
 }
 
