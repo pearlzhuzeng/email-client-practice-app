@@ -30,10 +30,9 @@ export function getMessageSender(message: Message): ?string {
   return emailSender && emailSender.value;
 }
 
-export function getMessageTimestamp(message: Message): ?string {
-  const { headers } = message.payload;
-  const emailTimestamp = headers.find(header => header.name === 'Date');
-  return emailTimestamp && emailTimestamp.value;
+export function getMessageTimestamp(messageMetadata: MessageMetadata): string {
+  const emailTimestamp = messageMetadata.internalDate;
+  return emailTimestamp;
 }
 
 export function getMessageSnippet(messageMetadata: MessageMetadata): string {
