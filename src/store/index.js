@@ -47,8 +47,16 @@ export function formatSender(messageSender: string): string {
 }
 
 export function formatTime(messageTimestamp: string): string {
-  const formattedTime = messageTimestamp.split('+')[0];
-  return formattedTime;
+  const formattedTime = new Date(Number(messageTimestamp));
+  const locale = navigator.language;
+  return formattedTime.toLocaleTimeString(locale, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    weekday: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
 }
 
 export default store;
