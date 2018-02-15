@@ -9,18 +9,24 @@ import store, {
   getMessageSnippet,
   formatSender,
   formatTime,
+  getMailboxes,
 } from './store';
 
-function getThreadIds() {
-  const { INBOX } = store.mailboxes;
-  if (INBOX == null) return [];
-  return INBOX.threadIds;
+function getThreadIds(mailboxName) {
+  // Use bracket notation for variable property look up
+  const mailbox = store.mailboxes[mailboxName];
+  // null check
+  return mailbox && mailbox.threadIds;
 }
 
-function renderSidebar() {
+function renderSidebar(mailboxName = 'INBOX') {
+  const threadIds = getThreadIds(mailboxName) || [];
   const sidebarContents = `
-    <h2 class="email-header">Inbox</h2>
-    <ul class="email-list">${getThreadIds()
+    <div>${getMailboxes(store)
+    .map(mailbox => `<a href="#"
+    data-mailbox-name="${mailbox}" class="email-header">${mailbox}</a>`)
+    .join('')}</div>
+    <ul class="email-list">${threadIds
     .map((threadId) => {
       const { messages } = store.threads[threadId];
       const messageMetadata = messages[messages.length - 1];
@@ -43,6 +49,14 @@ function renderSidebar() {
 
   const container = document.querySelector('.email-list-container');
   if (container != null) container.innerHTML = sidebarContents;
+
+  document.querySelectorAll('.email-header').forEach(node =>
+    node.addEventListener('click', (e: Event) => {
+      const { currentTarget } = e;
+      if (!(currentTarget instanceof HTMLElement)) return;
+      const name = currentTarget.dataset.mailboxName; // use data attributes
+      renderSidebar(name);
+    }));
 }
 
 renderSidebar();

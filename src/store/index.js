@@ -61,4 +61,9 @@ export function formatTime(messageTimestamp: string): string {
   });
 }
 
+export function getMailboxes(mailboxesData: Data): string[] {
+  const { mailboxes } = mailboxesData;
+  return Object.keys(mailboxes);
+}
+
 export default store;
